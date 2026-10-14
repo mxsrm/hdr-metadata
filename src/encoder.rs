@@ -4,12 +4,7 @@
 //! white point and maximum/minimum luminance. These functions emit parameter
 //! strings; they do not launch an encoder or validate its configuration.
 
-use crate::metadata::{
-    ContentLight,
-    HdrMetadata,
-    MasteringDisplay,
-    Point,
-};
+use crate::metadata::{ContentLight, HdrMetadata, MasteringDisplay, Point};
 
 /// Converts chromaticity coordinates to x265's units of 1/50,000.
 ///

@@ -26,18 +26,9 @@ mod encoder;
 mod metadata;
 mod probe;
 
-use std::{
-    error::Error,
-    num::NonZeroUsize,
-    path::PathBuf,
-    process,
-};
+use std::{error::Error, num::NonZeroUsize, path::PathBuf, process};
 
-use clap::{
-    Arg,
-    Command,
-    value_parser,
-};
+use clap::{Arg, Command, value_parser};
 
 /// Defines the command line using Clap's minimal builder API.
 ///

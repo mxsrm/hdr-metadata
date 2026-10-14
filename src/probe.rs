@@ -6,17 +6,9 @@
 
 use std::path::Path;
 
-use ffmpeg_next::{
-    codec,
-    format,
-    frame,
-    media,
-};
+use ffmpeg_next::{codec, format, frame, media};
 
-use crate::metadata::{
-    HdrMetadata,
-    Result,
-};
+use crate::metadata::{HdrMetadata, Result};
 
 /// Opens a video and scans decoded frames for static HDR10 metadata.
 ///

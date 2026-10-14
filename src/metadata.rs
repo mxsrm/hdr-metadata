@@ -9,17 +9,9 @@
 //! guarantee their sizes as part of its public ABI, so these declarations need
 //! review when changing the supported FFmpeg version.
 
-use std::{
-    error::Error,
-    mem::size_of,
-    ptr,
-};
+use std::{error::Error, mem::size_of, ptr};
 
-use ffmpeg_next::{
-    ffi,
-    frame,
-    util::frame::side_data::Type,
-};
+use ffmpeg_next::{ffi, frame, util::frame::side_data::Type};
 
 /// A metadata or probing result with a dynamically typed error.
 ///
@@ -90,10 +82,7 @@ pub struct HdrMetadata {
     pub frames_scanned: usize,
 }
 
-use std::os::raw::{
-    c_int,
-    c_uint,
-};
+use std::os::raw::{c_int, c_uint};
 
 /// The native mastering-display payload from FFmpeg's HDR metadata header.
 ///

@@ -4,6 +4,7 @@ use std::path::Path;
 
 pub fn probe(path: &Path, max_frames: usize) -> Result<HdrMetadata> {
     ffmpeg_next::init()?;
+    ffmpeg_next::util::log::set_level(ffmpeg_next::util::log::Level::Error);
     let mut input = format::input(path)?;
     let stream = input
         .streams()

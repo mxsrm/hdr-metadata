@@ -34,7 +34,7 @@ fn decimal_point(p: Point) -> String {
 ///
 /// # Example
 ///
-/// A BT.2020 display with a D65 white point, luminance of 0.005–1,000 cd/m²,
+/// A BT.2020 display with a D65 white point, luminance of 0.005-1,000 cd/m²,
 /// MaxCLL of 1,000 cd/m², and MaxFALL of 400 cd/m² produces:
 ///
 /// ```text

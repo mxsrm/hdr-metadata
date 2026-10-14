@@ -1,8 +1,11 @@
 [package]
 name = "hdr-metadata"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2024"
 rust-version = "1.85"
 
 [dependencies]
 ffmpeg-next = { version = "9.0", default-features = false, features = ["format", "codec"] }
+
+# Builder API only: no derive macros, color, or typo suggestions.
+clap = { version = "4.6", default-features = false, features = ["std", "help", "usage", "error-context"] }

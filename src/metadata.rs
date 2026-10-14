@@ -201,36 +201,36 @@ impl HdrMetadata {
         if self.color_transfer == "unknown" {
             self.color_transfer = format!("{:?}", frame.color_transfer_characteristic());
         }
-        if self.mastering.is_none()
-            && let Some(side) = frame.side_data(Type::MasteringDisplayMetadata)
-        {
-            // SAFETY: this FFmpeg side-data tag identifies the native mastering
-            // payload. The mirrored C layout must match the linked library, and
-            // its integer/rational fields permit every initialized bit pattern.
-            let raw: AVMasteringDisplayMetadata = unsafe { read_payload(side.data())? };
-            // FFmpeg orders primaries red, green, blue.
-            if raw.has_primaries != 0 && raw.has_luminance != 0 {
-                self.mastering = Some(MasteringDisplay {
-                    red: point(raw.display_primaries[0])?,
-                    green: point(raw.display_primaries[1])?,
-                    blue: point(raw.display_primaries[2])?,
-                    white: point(raw.white_point)?,
-                    min_luminance: rational(raw.min_luminance)?,
-                    max_luminance: rational(raw.max_luminance)?,
-                });
+        if self.mastering.is_none() {
+            if let Some(side) = frame.side_data(Type::MasteringDisplayMetadata) {
+                // SAFETY: this FFmpeg side-data tag identifies the native mastering
+                // payload. The mirrored C layout must match the linked library, and
+                // its integer/rational fields permit every initialized bit pattern.
+                let raw: AVMasteringDisplayMetadata = unsafe { read_payload(side.data())? };
+                // FFmpeg orders primaries red, green, blue.
+                if raw.has_primaries != 0 && raw.has_luminance != 0 {
+                    self.mastering = Some(MasteringDisplay {
+                        red: point(raw.display_primaries[0])?,
+                        green: point(raw.display_primaries[1])?,
+                        blue: point(raw.display_primaries[2])?,
+                        white: point(raw.white_point)?,
+                        min_luminance: rational(raw.min_luminance)?,
+                        max_luminance: rational(raw.max_luminance)?,
+                    });
+                }
             }
         }
-        if self.cll.is_none()
-            && let Some(side) = frame.side_data(Type::ContentLightLevel)
-        {
-            // SAFETY: this tag identifies the native content-light payload. Its
-            // mirrored C layout must match the linked library, and both unsigned
-            // fields permit every initialized bit pattern.
-            let raw: AVContentLightMetadata = unsafe { read_payload(side.data())? };
-            self.cll = Some(ContentLight {
-                max_cll: raw.MaxCLL,
-                max_fall: raw.MaxFALL,
-            });
+        if self.cll.is_none() {
+            if let Some(side) = frame.side_data(Type::ContentLightLevel) {
+                // SAFETY: this tag identifies the native content-light payload. Its
+                // mirrored C layout must match the linked library, and both unsigned
+                // fields permit every initialized bit pattern.
+                let raw: AVContentLightMetadata = unsafe { read_payload(side.data())? };
+                self.cll = Some(ContentLight {
+                    max_cll: raw.MaxCLL,
+                    max_fall: raw.MaxFALL,
+                });
+            }
         }
         Ok(())
     }

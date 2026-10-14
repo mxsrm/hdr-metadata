@@ -1,5 +1,14 @@
-use ffmpeg_next::{ffi, frame, util::frame::side_data::Type};
-use std::{error::Error, mem::size_of, ptr};
+use std::{
+    error::Error,
+    mem::size_of,
+    ptr,
+};
+
+use ffmpeg_next::{
+    ffi,
+    frame,
+    util::frame::side_data::Type,
+};
 
 pub type Result<T> = std::result::Result<T, Box<dyn Error>>;
 
@@ -35,7 +44,10 @@ pub struct HdrMetadata {
     pub frames_scanned: usize,
 }
 
-use std::os::raw::{c_int, c_uint};
+use std::os::raw::{
+    c_int,
+    c_uint,
+};
 
 // Keep your existing `ffi` import.
 

@@ -1,6 +1,16 @@
-use crate::metadata::{HdrMetadata, Result};
-use ffmpeg_next::{codec, format, frame, media};
 use std::path::Path;
+
+use ffmpeg_next::{
+    codec,
+    format,
+    frame,
+    media,
+};
+
+use crate::metadata::{
+    HdrMetadata,
+    Result,
+};
 
 pub fn probe(path: &Path, max_frames: usize) -> Result<HdrMetadata> {
     ffmpeg_next::init()?;

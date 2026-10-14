@@ -1,11 +1,12 @@
-use crate::metadata::{ContentLight, HdrMetadata, MasteringDisplay, Point};
+use crate::metadata::{
+    ContentLight,
+    HdrMetadata,
+    MasteringDisplay,
+    Point,
+};
 
 fn scaled_point(p: Point) -> String {
-    format!(
-        "{:.0},{:.0}",
-        (p.x * 50_000.0).round(),
-        (p.y * 50_000.0).round()
-    )
+    format!("{:.0},{:.0}", (p.x * 50_000.0).round(), (p.y * 50_000.0).round())
 }
 
 fn decimal_point(p: Point) -> String {
@@ -71,10 +72,7 @@ mod tests {
             green: Point { x: 0.170, y: 0.797 },
             blue: Point { x: 0.131, y: 0.046 },
             red: Point { x: 0.708, y: 0.292 },
-            white: Point {
-                x: 0.3127,
-                y: 0.329,
-            },
+            white: Point { x: 0.3127, y: 0.329 },
             max_luminance: 1000.0,
             min_luminance: 0.005,
         };

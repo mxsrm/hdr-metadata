@@ -1,13 +1,16 @@
 # Justfile
 
 fmt:
-    cargo +nightly fmt --all
+    cargo fmt --all
 
 clippy:
-    cargo +nightly clippy
+    cargo clippy --locked --all-targets -- -D warnings
 
-clean:
-    git clean -dfx
+test:
+    cargo test --locked --all-targets
 
 build:
-    cargo build --profile release
+    cargo build --release --locked
+
+release:
+    cargo smart-release --no-push --no-changelog-preview --allow-dirty --no-publish --execute

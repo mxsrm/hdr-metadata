@@ -6,8 +6,12 @@ use std::{env, error::Error, path::PathBuf, process};
 
 fn run() -> Result<(), Box<dyn Error>> {
     let mut args = env::args_os().skip(1);
-    let path = PathBuf::from(args.next().ok_or("Usage: hdr-metadata <video> [max_frames]")?);
-    let max_frames = args.next()
+    let path = PathBuf::from(
+        args.next()
+            .ok_or("Usage: hdr-metadata <video> [max_frames]")?,
+    );
+    let max_frames = args
+        .next()
         .map(|s| s.to_string_lossy().parse::<usize>())
         .transpose()?
         .unwrap_or(30);

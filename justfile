@@ -1,10 +1,10 @@
 # Justfile
 
 fmt:
-    cargo fmt --all
+    cargo +nightly fmt --all
 
 clippy:
-    cargo clippy --locked --all-targets -- -D warnings
+    cargo +nightly clippy --locked --all-targets -- -D warnings
 
 test:
     cargo test --locked --all-targets
